@@ -1,0 +1,80 @@
+.item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.image {
+  min-height: 20rem;
+}
+
+.cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.itemContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.tags {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-flow: wrap;
+  right: 0;
+}
+
+.progressContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.tag {
+  color: white;
+  background-color: blue;
+  border-radius: 5pt;
+  font-size: 0.8rem;
+  display: flex;
+  margin: 0.3rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  height: 1.6rem;
+  align-items: center;
+}
+
+.title {
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 0.5rem 2rem;
+}
+
+.content {
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  margin: 0.5rem 2rem;
+}
+
+.caption {
+  position: absolute;
+  right: 10pt;
+  bottom: 10pt;
+  color: white;
+  font-size: 0.7rem;
+}
