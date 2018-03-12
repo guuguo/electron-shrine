@@ -11,11 +11,6 @@ export const ADD_DATA = 'ADD_DATA';
 export const ADD_DETAIL = 'ADD_DETAIL';
 export type actionType = {
   +type: string
-  // +items: itemType[],
-  // +category: string,
-  // +page: number,
-  // +detail: {},
-  // +id: string
 };
 
 export function addData(items: [], category: string, page: number) {
@@ -66,9 +61,16 @@ function resolveDetailData(res) {
   const el = document.createElement('html');
   el.innerHTML = res;
   const articalE = el.getElementsByClassName('entry-content')[0];
+  let magMatch = articalE.innerHTML.replace('保护作者版权 本站不提供下载','').match(regex)
+  let mag
+  if (magMatch === undefined || magMatch === null) {
+    mag = "";
+  } else {
+    mag = `magnet:?xt=urn:btih:${magMatch[0]}`
+  }
   return {
     content: articalE.innerHTML,
-    magnent: articalE.innerHTML.match(regex)
+    magnent: mag
   };
 }
 

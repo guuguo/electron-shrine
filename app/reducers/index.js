@@ -5,7 +5,7 @@ import counter from './counter';
 import shrineData from './network';
 
 const rootReducer = combineReducers({
-  counter,
+  // counter,
   shrineData,
   router,
 });

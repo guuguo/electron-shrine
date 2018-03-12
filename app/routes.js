@@ -13,7 +13,7 @@ export default () => (
       <Route path="/shrine" component={ShrinePage} />
       <Route path="/counter" component={CounterPage} />
       <Route path="/detail/:category/:id" component={DetailPage} />
-      <Route path="/" component={HomePage} />
+      <Route path="/" component={ShrinePage} />
     </Switch>
   </App>
 );

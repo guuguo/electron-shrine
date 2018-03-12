@@ -13,7 +13,7 @@ export type itemType = {
 };
 export type detailType = {
   content: string,
-  magnent: string
+  magnent?: string
 };
 export type categoryType = {
   +byId: {},
@@ -65,7 +65,7 @@ export default function shrineData(state = {}, action) {
         }, action.items, action.page)
       };
     case ADD_DETAIL: {
-      const tState = state;
+      const tState = Object.assign({}, state);
       tState[action.category].byId[action.id].detail = action.detail;
       return tState;
     }
