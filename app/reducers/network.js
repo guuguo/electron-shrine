@@ -1,5 +1,5 @@
 // @flow
-import { ADD_DATA, ADD_DETAIL } from '../actions/network';
+import { ADD_DATA, ADD_DETAIL, SAVE_CATEGORY_STATE, SAVE_CATEGORY_OFFSET } from '../actions/network';
 
 export type itemType = {
   +id: string,
@@ -13,7 +13,8 @@ export type itemType = {
 };
 export type detailType = {
   content: string,
-  magnent?: string
+  magnent?: string,
+  baidupan?: string
 };
 export type categoryType = {
   +byId: {},
@@ -35,7 +36,8 @@ export type categoryType = {
 //       },
 //     },
 //     allIds: ['1', '2'],
-//     page: 1
+//     page: 1,
+//     currentCategory: "动画"
 //   }
 // }
 export type contentData = {
@@ -44,6 +46,9 @@ export type contentData = {
 
 const addPage =
   (state: categoryType, itemData: itemType[], page) => {
+    if (state.page >= page) {
+      return state;
+    }
     const tempState = state;
     itemData.forEach(it => {
       tempState.byId[it.id] = it;
@@ -61,13 +66,24 @@ export default function shrineData(state = {}, action) {
         [action.category]: addPage(state[action.category] || {
           byId: {},
           allIds: [],
-          page: action.page
+          page: 0
         }, action.items, action.page)
       };
     case ADD_DETAIL: {
       const tState = Object.assign({}, state);
       tState[action.category].byId[action.id].detail = action.detail;
       return tState;
+    }
+    case SAVE_CATEGORY_STATE: {
+      return {
+        ...state,
+        currentCategory: action.categoryIndex
+      };
+    }
+    case SAVE_CATEGORY_OFFSET: {
+      const res = { ...state }
+      res[action.category].offset = action.offset
+      return res;
     }
     default:
       return state;

@@ -1,12 +1,20 @@
 
-
-
 .item {
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   position: relative;
 }
 
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+}
+
 .image {
+  min-height: 300px;
 }
 
 .cover {
@@ -32,7 +40,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  right: 50px;
   display: flex;
   flex-flow: wrap;
 }
@@ -45,6 +53,7 @@
   align-items: center;
   align-content: center;
 }
+
 .tag {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -62,6 +71,21 @@
   color: white;
   font-weight: bold;
   font-size: 1.7rem;
+  text-align: center;
+  margin: 1rem 3rem;
+}
+
+.articalTitle {
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  margin: 1rem 3rem;
+}
+
+.articalCaption {
+  color: white;
+  font-size: 0.8rem;
   text-align: center;
   margin: 1rem 3rem;
 }

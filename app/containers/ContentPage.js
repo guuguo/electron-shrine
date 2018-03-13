@@ -24,19 +24,54 @@ class ContentPage extends Component<Props> {
   }
 
   componentWillMount() {
+    this.fetchData();
+  }
+
+  componentWillUpdate() {
+  }
+
+  componentDidUpdate() {
+    this.fetchData();
+  }
+  componentWillUnmount() {
+  }
+
+  fetchData() {
     const category = this.props.data[this.props.category];
     if (category === undefined || category.page === undefined) {
       this.props.fetchHome(this.state.page, this.props.category);
     }
-    // this.props.addData([{
-    //   id: '12123',
-    //   title: 'sdaasdd',
-    //   date: '12-12',
-    //   content: '',
-    //   author: 'guuguo',
-    //   image: 'https://ww1.sinaimg.cn/large/005zWjpngy1fp99xvmhfej30zk0k0761.jpg',
-    //   tags: ['1', '2'],
-    // }], this.props.category, 1);
+  }
+
+  renderArticalContent(item) {
+    return (
+      <div className={styles.itemContent} style={{ margin: 0 }}>
+        <div className={styles.tags}>
+          {item.tags.map(it => (<div className={styles.tag}><span>{it}</span></div>))}
+        </div>
+        <div className={styles.articalTitle}>{item.author} · {item.date}</div>
+        <div
+          className={styles.articalCaption}
+          dangerouslySetInnerHTML={{ __html: item.content }}
+        />
+      </div>);
+  }
+
+  renderImageContent(item) {
+    return (
+      <div className={styles.itemContent} style={{ margin: 0 }}>
+        <div className={styles.tags}>
+          {item.tags.map(it => (<div className={styles.tag}><span>{it}</span></div>))}
+        </div>
+        <div className={styles.title}>{item.author} · {item.date}</div>
+        <div className={styles.content}>
+          {item.title}
+        </div>
+        <div
+          className={styles.caption}
+          dangerouslySetInnerHTML={{ __html: item.content }}
+        />
+      </div>);
   }
 
   render() {
@@ -49,45 +84,38 @@ class ContentPage extends Component<Props> {
         </div>);
     }
     return (
-      <List style={{ maxWidth: 800, margin: 'auto' }}>
-        {
-          categoryItem.allIds.map((itemId) => {
-          const item: itemType = categoryItem.byId[itemId];
-          return (
-            <Link to={`/detail/${this.props.category}/${itemId}`}>
-              <div className={styles.item} style={{ margin: 0 }} >
-                <img
-                  alt=""
-                  className={styles.image}
-                  src={item.image}
-                  width="100%"
-                />
-              <span
-                className={styles.cover}
-                style={{
-                  backgroundColor: 'rgba(0,0,0,.5)',
-                  backgroundSize: '100%'
-                }}
-              />
-              <div className={styles.itemContent} style={{ margin: 0 }}>
-                <div className={styles.tags}>
-                  {item.tags.map(it => (<div className={styles.tag}><span>{it}</span></div>))}
-                </div>
-                <div className={styles.title}>{item.author} · {item.date}</div>
-                <div className={styles.content}>
-                  {item.title}
-                </div>
-                <div
-                  className={styles.caption}
-                  dangerouslySetInnerHTML={{ __html: item.content }}
-                />
-              </div>
-            </div>
-            </Link>
-          );
-        })
-        }
-      </List>
+      <div className={styles.container}>
+        <List style={{ maxWidth: 800, margin: 'auto' }}>
+          {
+            categoryItem.allIds.map((itemId) => {
+              const item: itemType = categoryItem.byId[itemId];
+              return (
+                <Link key={itemId} to={`/detail/${this.props.category}/${itemId}`}>
+                  <div className={styles.item} style={{ margin: 0 }}>
+                    <img
+                      alt=""
+                      className={styles.image}
+                      src={item.image}
+                      width="100%"
+                    />
+                    <span
+                      className={styles.cover}
+                      style={{
+                        backgroundColor: 'rgba(0,0,0,.5)',
+                        backgroundSize: '100%'
+                      }}
+                    />
+                    {item.image === '' ?
+                      this.renderArticalContent(item) :
+                      this.renderImageContent(item)
+                    }
+                  </div>
+                </Link>
+              );
+            })
+          }
+        </List>
+      </div>
     );
   }
 }

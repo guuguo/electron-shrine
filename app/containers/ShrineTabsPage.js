@@ -6,7 +6,7 @@ import Tabs, { Tab } from 'material-ui/Tabs';
 import ContentPage from './ContentPage';
 
 export const categories = {
-  动画: 'anime', 文章: 'age', 漫画: 'comic', 游戏: 'game', 音乐: 'op', 轻小说: 'book'
+  anime: '动画', age: '文章', comic: '漫画', game: '游戏', op: '音乐', book: '轻小说'
 };
 
 const styles = theme => ({
@@ -21,7 +21,7 @@ const styles = theme => ({
   },
   content: {
     overflowX: 'hidden',
-    overflowY: 'auto',
+    overflowY: 'hidden',
     position: 'absolute',
     top: 50,
     bottom: 10,
@@ -34,31 +34,33 @@ type shrineTabsProps = {
   theme: {},
   fetchHome: (page: number, category: string) => void,
   addData: () => void,
+  saveCategoryState: () => void,
   data: {}
 };
 
 class ShrineTabsPage extends React.Component<shrineTabsProps> {
   props: shrineTabsProps
   state = {
-    value: 0,
   };
 
   handleChange = (event, value) => {
-    this.setState({ value });
+    this.props.saveCategoryState(value);
+    // this.setState({ value });
   };
 
-  handleChangeIndex = index => {
-    this.setState({ value: index });
-  };
+  // handleChangeIndex = index => {
+  //   this.setState({ value: index });
+  // };
 
   render() {
-    const { classes, theme } = this.props;
-
+    const { data, classes, theme } = this.props;
+    let currentCategory = data.currentCategory;
+    if (currentCategory === undefined) { currentCategory = 0; }
     return (
       <div className={classes.root}>
         <AppBar className={classes.header} position="static" color="default">
           <Tabs
-            value={this.state.value}
+            value={currentCategory}
             onChange={this.handleChange}
             indicatorColor="primary"
             textColor="primary"
@@ -66,17 +68,16 @@ class ShrineTabsPage extends React.Component<shrineTabsProps> {
           >
             {Object.keys(categories).map(it => (<Tab
               key={`t${it}`}
-              style={{ width: 100 }}
-              label={it}
+              style={{ widthsaveCategoryStatesaveCategoryState: 100 }}
+              label={categories[it]}
             />))}
           </Tabs>
         </AppBar>
         <div className={classes.content}>
           <ContentPage
-            key={`t${this.state.value}`}
             fetchHome={this.props.fetchHome}
             addData={this.props.addData}
-            category={categories[Object.keys(categories)[this.state.value]]}
+            category={Object.keys(categories)[currentCategory]}
             data={this.props.data}
             dir={theme.direction}
           />
