@@ -28,6 +28,7 @@ p {
 }
 img{
   width: 100%;
+  align-self: center;
 }
 li {
   list-style: none;
@@ -35,7 +36,6 @@ li {
 
 a {
   color: white;
-  opacity: 0.75;
   text-decoration: none;
 }
 

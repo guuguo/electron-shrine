@@ -13,8 +13,8 @@ export type itemType = {
 };
 export type detailType = {
   content: string,
-  magnent?: string,
-  baidupan?: string
+  magnent?: [],
+  baidupan?: []
 };
 export type categoryType = {
   +byId: {},

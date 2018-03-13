@@ -46,6 +46,7 @@ class DetailPage extends Component<Props> {
   handleOpenClick(url, e) {
     shell.openExternal(url);
   }
+
   componentWillMount() {
     const { id, category } = this.props.match.params;
     if (this.props.data[category].byId[id].detail === undefined) {
@@ -62,7 +63,7 @@ class DetailPage extends Component<Props> {
           <Toolbar>
             <Link to="/">
               <IconButton aria-label="Menu">
-                <ArrowBack />
+                <ArrowBack/>
               </IconButton>
             </Link>
             <Typography variant="title" color="inherit">
@@ -73,7 +74,7 @@ class DetailPage extends Component<Props> {
         <div className={styles.content}>
           {item.detail === undefined ?
             <div className={styles.progressContainer}>
-              <CircularProgress style={{ color: 'white' }} thickness={7} />
+              <CircularProgress style={{ color: 'white' }} thickness={7}/>
             </div> : this.renderContent(item)
           }
         </div>
@@ -91,8 +92,8 @@ class DetailPage extends Component<Props> {
   renderContent(item) {
     return (
       <div>
-        {this.renderCopyContent(item.detail.magnent)}
-        {this.renderCopyContent(item.detail.baidupan, false)}
+        {item.detail.magnent.map(it => this.renderLinkContent(it))}
+        {item.detail.baidupan.map(it => this.renderLinkContent(it, false))}
         <div
           className={styles.contentCard}
           dangerouslySetInnerHTML={{ __html: item.detail.content }}
@@ -100,7 +101,7 @@ class DetailPage extends Component<Props> {
       </div>);
   }
 
-  renderCopyContent(str, isCopy = true) {
+  renderLinkContent(str, isCopy = true) {
     return str !== '' ?
       <Card className={styles.card}>
         <CardContent className={styles.magnentContent}>{str}
@@ -112,7 +113,7 @@ class DetailPage extends Component<Props> {
             {isCopy ? '复制' : '打开'}
           </Button>
         </CardContent>
-      </Card> : <div />;
+      </Card> : <div/>;
   }
 }
 

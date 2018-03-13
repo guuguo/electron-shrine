@@ -84,12 +84,12 @@ function resolveDetailData(res) {
   const magMatch = articalE.innerHTML.replace('保护作者版权 本站不提供下载', '').match(regexMagnent);
   const panMatch = articalE.innerHTML.match(regexPan);
   let magnent
-  if (magMatch === undefined || magMatch === null) magnent = ''
-  else magnent = `magnet:?xt=urn:btih:${magMatch[0]}`;
+  if (magMatch === undefined || magMatch === null) magnent = []
+  else magnent = magMatch.map(it=>`magnet:?xt=urn:btih:${it}`);
 
   let baidupan
-  if (panMatch === undefined || panMatch === null) baidupan = ''
-  else baidupan = `https://pan.baidu.com/${panMatch[0]}`;
+  if (panMatch === undefined || panMatch === null) baidupan = []
+  else baidupan = panMatch.map(it=>`https://pan.baidu.com/${it}`);
 
   return {
     content: articalE.innerHTML,

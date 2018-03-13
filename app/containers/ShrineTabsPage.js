@@ -35,27 +35,27 @@ type shrineTabsProps = {
   fetchHome: (page: number, category: string) => void,
   addData: () => void,
   saveCategoryState: () => void,
-  data: {}
+  saveCategoryOffset: () => void,
+  fetchDetail:()=>void,
+  data: {},
+  history:{}
 };
 
 class ShrineTabsPage extends React.Component<shrineTabsProps> {
   props: shrineTabsProps
-  state = {
-  };
+  state = {};
 
   handleChange = (event, value) => {
     this.props.saveCategoryState(value);
-    // this.setState({ value });
   };
 
-  // handleChangeIndex = index => {
-  //   this.setState({ value: index });
-  // };
 
   render() {
     const { data, classes, theme } = this.props;
     let currentCategory = data.currentCategory;
-    if (currentCategory === undefined) { currentCategory = 0; }
+    if (currentCategory === undefined) {
+      currentCategory = 0;
+    }
     return (
       <div className={classes.root}>
         <AppBar className={classes.header} position="static" color="default">
@@ -75,9 +75,13 @@ class ShrineTabsPage extends React.Component<shrineTabsProps> {
         </AppBar>
         <div className={classes.content}>
           <ContentPage
+            key={currentCategory}
             fetchHome={this.props.fetchHome}
             addData={this.props.addData}
             category={Object.keys(categories)[currentCategory]}
+            saveCategoryOffset={this.props.saveCategoryOffset}
+            fetchDetail={this.props.fetchDetail}
+            history={this.props.history}
             data={this.props.data}
             dir={theme.direction}
           />
