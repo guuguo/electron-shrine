@@ -1,0 +1,15 @@
+.iconButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 56px;
+  height: 56px;
+  color: white;
+  font-size: 2rem;
+}
+
+.absolute {
+  position: absolute;
+  left: 0;
+  top: 0;
+}

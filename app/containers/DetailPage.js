@@ -13,7 +13,7 @@ import Card, { CardContent } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Snackbar from 'material-ui/Snackbar';
 import { clipboard, shell } from 'electron';
-import Slide from 'material-ui/transitions/Slide';
+import TransitionDown from '../utils/Slide';
 import styles from './DetailPage.css';
 import * as NetworkActions from '../actions/network';
 import type { itemType } from '../reducers/network';
@@ -24,10 +24,6 @@ type Props = {
   data: {},
   match: {}
 };
-
-function TransitionDown(props) {
-  return <Slide direction="down" {...props} />;
-}
 
 class DetailPage extends Component<Props> {
   props: Props;
